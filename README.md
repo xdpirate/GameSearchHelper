@@ -30,13 +30,15 @@ OpenCritic has no proper search system to send a request to, only a JavaScript-b
 This option strips any non-ASCII character from the game name, such as &trade;, &copy;, &reg;, etc, in order to perform a clean search for the game name only. This *will* break searches for games with names containing non-latin script, such as Japanese. If you need search to work for games in languages with non-latin scripts, disable this option.
 
 ## Supported sites
-The script currently runs on the following pages. Feel free to request your favorite gaming website to be added to this list.
-- Steam Store (Game pages, bundle pages)
-- Hookshot Media (Game pages, news, reviews, features, guides)
-  - Nintendo Life 
-  - Push Square
-  - Pure Xbox
-- More to come
+The script currently runs on the following websites. Feel free to request your favorite gaming website to be added to this list!
+
+| Context | Websites | Supported pages |
+| --- | --- | --- |
+| HookshotMedia | Nintendo Life<br />Push Square<br />Pure Xbox | Game pages<br />News<br />Reviews<br />Features<br />Guides |
+| Metacritic | Metacritic | Game pages<br />Games home<br />System home<br />Game lists/browse pages<br />Legacy page |
+| Steam | Steam | Game pages<br />Bundle pages |
+
+<br />
 
 ## Built-in search engines
 - Startpage
@@ -72,6 +74,14 @@ GSH replaces three previous scripts of mine:
 If you installed any of these scripts previously, you can remove all of them, and replace them with this script, as it has all the features of the scripts it replaces.
 
 ## Changelog
+### v1.1.2
+- The script now supports most game pages on Metacritic. Currently supported pages:
+  - Games home (/game)
+  - System home (/game/$system)
+  - Game browse pages (/browse/games/*)
+  - Game detail pages (/game/$system/$gameName)
+  - Legacy page (/game/legacy)
+
 ### v1.1.1
 - The script now supports each game item on Steam bundle pages
 - Added an option to strip non-ASCII characters from the search term
