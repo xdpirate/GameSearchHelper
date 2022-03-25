@@ -130,7 +130,7 @@ GM_addStyle(`
         margin-right: 4px;
     }
 
-    #HMContainer {
+    .HMContainer {
         padding: 5px;
         padding-top: 10px;
         background-color: white;
@@ -362,8 +362,15 @@ document.getElementById("GSHCancelEditButton").onclick = function() {
 };
 
 let game = {
-    name: "", 
-    namePlus: ""
+    set name(name) {
+      this._name = name;
+    },
+    get name() {
+      return this._name;
+    },
+    get namePlus() {
+      return this._name.replace(/%20/g, "+");
+    }
 };
 
 if(currentContext == "Steam") {
@@ -371,51 +378,10 @@ if(currentContext == "Steam") {
 
     if(!headerElement) {
         die("Could not find header element");
+    } else {
+        game.name = encodeURIComponent(headerElement.innerHTML);
+        addGSHBox(game, headerElement, "", "GSHIcon");
     }
-
-    game.name = encodeURIComponent(headerElement.innerHTML);
-    game.namePlus = game.name.replace(/%20/g, "+");
-
-    headerElement.append(document.createElement("br"));
-
-    for(let i = 0; i < providers.length; i++) {
-        if(providers[i].enabled) {
-            let searchLink = document.createElement("span");
-            searchLink.classList.add("GSHIcon");
-
-            let title = providers[i].title;
-            let searchURL = providers[i].url.replace("%search%", game.name).replace("%searchPlus%", game.namePlus);
-            let icon = providers[i].icon;
-
-            searchLink.innerHTML = `
-                <a target="_blank" title="${title}" href="${searchURL}">
-                    <img src="${icon}" width="16px" height="16px" />
-                </a>
-            `;
-
-            headerElement.append(searchLink);
-        }
-    }
-
-    for(const provider in GSHSettings.customProviders) {
-        if(GSHSettings.customProviders[provider].enabled[currentContext]) {
-            let searchLink = document.createElement("span");
-            searchLink.classList.add("GSHIcon");
-
-            let title = GSHSettings.customProviders[provider].title;
-            let searchURL = GSHSettings.customProviders[provider].url.replace("%search%", game.name).replace("%searchPlus%", game.namePlus);
-            let icon = GSHSettings.customProviders[provider].icon;
-
-            searchLink.innerHTML = `
-                <a target="_blank" title="${title}" href="${searchURL}">
-                    <img src="${icon}" width="16px" height="16px" />
-                </a>
-            `;
-
-            headerElement.append(searchLink);
-        }
-    }
-
  } else if(currentContext == "HookshotMedia") {
     let gameOverview, headerElement;
     if(window.location.href.includes("/games/")) {
@@ -425,27 +391,44 @@ if(currentContext == "Steam") {
             die("Could not find header element");
         } else {
             game.name = encodeURIComponent(headerElement.querySelector("h1.title > a").innerHTML.match(/^(.+) \(.+\)$/)[1]);
-            game.namePlus = game.name.replace(/%20/g, "+");
+            addGSHBox(game, headerElement, "HMContainer", "HMIcon");
         }
     } else {
         gameOverview = document.getElementById("game-overview");
 
         if(!gameOverview) {
-            die("Could not find game overview");
+            // No single game overview found, is there a "featured games" multi-game section?
+            let multiGames = document.querySelector("section.block.related-games");
+            if(multiGames) {
+                let games = multiGames.querySelectorAll("li.item");
+                for(let i = 0; i < games.length; i++) {
+                    game.name = encodeURIComponent(games[i].querySelector("h2.heading > a").innerHTML.match(/(.*?)</)[1].trim());
+                    addGSHBox(game, games[i], "HMContainer", "HMIcon");
+                }
+            } else {
+                die("Could not find game overview or featured games");
+            }
         } else {
             headerElement = gameOverview.querySelector("header.widget-header");
             game.name = encodeURIComponent(gameOverview.querySelector("div.body > div.items > div.item > p.definition > a").innerHTML);
-            game.namePlus = game.name.replace(/%20/g, "+");
+
+            addGSHBox(game, headerElement, "HMContainer", "HMIcon");
         }
     }
+}
 
-    let container = document.createElement("div");
-    container.id = "HMContainer";
-    
+saveData();
+
+function addGSHBox(game, containerElement, boxClass, iconClass) {
+    let GSHBox = document.createElement("div");
+    if(boxClass !== "") {
+        GSHBox.classList.add(boxClass);
+    }
+
     for(let i = 0; i < providers.length; i++) {
         if(providers[i].enabled) {
             let searchLink = document.createElement("span");
-            searchLink.classList.add("HMIcon");
+            searchLink.classList.add(iconClass);
 
             let title = providers[i].title;
             let searchURL = providers[i].url.replace("%search%", game.name).replace("%searchPlus%", game.namePlus);
@@ -457,7 +440,7 @@ if(currentContext == "Steam") {
                 </a>
             `;
 
-            container.append(searchLink);
+            GSHBox.append(searchLink);
         }
     }
 
@@ -476,14 +459,12 @@ if(currentContext == "Steam") {
                 </a>
             `;
 
-            container.append(searchLink);
+            GSHBox.append(searchLink);
         }
     }
     
-    headerElement.append(container);
+    containerElement.append(GSHBox);
 }
-
-saveData();
 
 function saveData() {
     let builtinSearchCheckboxes = document.querySelectorAll(`input[id^="GSHBuiltinSearchCheck_"]`);

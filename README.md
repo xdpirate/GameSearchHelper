@@ -56,3 +56,10 @@ GSH replaces three previous scripts of mine:
 - GSH OpenCritic Helper
 
 If you installed any of these scripts previously, you can remove all of them, and replace them with this script, as it has all the features of the scripts it replaces.
+
+## Changelog
+### v1.1
+- The script now supports multi-game pages on Hookshot Media ("Featured Games")
+
+### v1.0
+- Initial release
