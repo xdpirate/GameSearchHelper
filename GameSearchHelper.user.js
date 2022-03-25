@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Game Search Helper
 // @namespace    https://store.steampowered.com/
-// @version      1.0
+// @version      1.1
 // @license      GPLv3
 // @description  Adds buttons on various game sites and stores to search for the game on external sites
 // @author       xdpirate
