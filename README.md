@@ -76,6 +76,12 @@ GSH replaces three previous scripts of mine:
 If you installed any of these scripts previously, you can remove all of them, and replace them with this script, as it has all the features of the scripts it replaces.
 
 ## Changelog
+### v1.2.1
+- Added a link to the new [custom search engine page on Github](https://github.com/xdpirate/GameSearchHelper/blob/main/CustomSearchEngines.md) inside the options box
+- The custom search engine Github page now previews the icons for each custom search engine
+- Adjusted max size of custom search engine box
+- Adjusted some text
+
 ### v1.2.0
 - Added support for one-click installation of a number of custom search engines at the [CustomSearchEngines.md](https://github.com/xdpirate/GameSearchHelper/blob/main/CustomSearchEngines.md) page on Github! Just visit the page with GSH installed and enabled, then click an installation link to add the respective search engine to GSH.
 - Renamed "Load OpenCritic results with one click" to "Open Startpage proxy results with one click".

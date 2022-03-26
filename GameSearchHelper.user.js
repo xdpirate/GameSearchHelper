@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Game Search Helper
 // @namespace    https://store.steampowered.com/
-// @version      1.2.0
+// @version      1.2.1
 // @license      GPLv3
 // @description  Adds buttons on various game sites and stores to search for the game on external sites
 // @author       xdpirate
@@ -103,7 +103,7 @@ GM_addStyle(`
     }
 
     #GSHBuiltInSearchEngines, #GSHCustomSearchEngines {
-        max-width: 240px;
+        max-width: 500px;
         height: 120px; 
         overflow-y: scroll;
         overflow-x: scroll;
@@ -134,7 +134,7 @@ GM_addStyle(`
         padding: 5px;
     }
 
-    .GSHModifyCustomButton, #GSHCancelEditButton, #GSHNewCustomSearchButton {
+    .GSHModifyCustomButton, #GSHCancelEditButton, #GSHNewCustomSearchButton, #GSHGetEnginesButton {
         font-size: 12px !important;
         cursor: pointer;
         font-weight: bold !important;
@@ -202,6 +202,10 @@ if(currentContext == "Startpage") {
         for(let i = 0; i < rows.length; i++) {
             let installLink = rows[i].querySelector("td:nth-child(2) > a");
             let params = new URLSearchParams(installLink.href.substring(12));
+
+            let titleCell = rows[i].querySelector("td:nth-child(1)");
+            titleCell.innerHTML = `<img src="${params.get("icon")}" /> ${titleCell.innerHTML}`;
+
             if(GSHSettings.customProviders[params.get("uuid")]) {
                 let newSpan = document.createElement("span");
                 newSpan.innerHTML = "Already added to Game Search Helper";
@@ -328,14 +332,14 @@ newBox.innerHTML = `
 
                 <div id="GSHWrapper">
                     <div class="GSHSearchContainer">
-                        Enabled built-in search engines:<br />
+                        Built-in search engines:<br />
                         <div id="GSHBuiltInSearchEngines">
                             ${providersList}
                         </div>
                     </div>
 
                     <div class="GSHSearchContainer">
-                        Enabled custom search engines: <span id="GSHNewCustomSearchButton">[new]</span><br />
+                        Custom search engines: <span id="GSHNewCustomSearchButton">[new]</span> <a id="GSHGetEnginesButton" href="https://github.com/xdpirate/GameSearchHelper/blob/main/CustomSearchEngines.md" target="_blank">[get]</a><br />
                         <div id="GSHCustomSearchEngines">
                             ${customProvidersList}
                         </div>
