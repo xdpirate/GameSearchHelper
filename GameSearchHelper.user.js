@@ -362,7 +362,7 @@ newBox.innerHTML = `
 
                 <div id="GSHOptionsDiv">
                     <input type="checkbox" id="GSHOpenCriticHelperCheckbox"${GSHSettings.OpenCriticHelperEnabled ? " checked" : ""}>
-                    <label for="GSHOpenCriticHelperCheckbox">Open Startpage proxy results with one click</label> <sup><a href="https://github.com/xdpirate/GameSearchHelper/#options= target="_blank">?</a></sup><br />
+                    <label for="GSHOpenCriticHelperCheckbox">Open Startpage proxy results with one click</label> <sup><a href="https://github.com/xdpirate/GameSearchHelper/#options=" target="_blank">?</a></sup><br />
                     <input type="checkbox" id="GSHStripSpecialCharsCheckbox"${GSHSettings.StripSpecialCharsEnabled ? " checked" : ""}>
                     <label for="GSHStripSpecialCharsCheckbox">Strip non-ASCII characters from search term (&trade;, &copy;, etc)</label><br />
                 </div>
