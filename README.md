@@ -11,7 +11,7 @@ Game Search Helper (GSH) is a userscript that runs on various gaming-related web
 After installation, navigate to a supported site (see below for an updated list). A small box with a magnifying glass will appear in the top-left corner of the page; Click it to expand the GSH options. The box will show the current context (site or groups of sites) you're in, and which search engines and options are enabled. Your enabled search engines are saved on a per-context basis, meaning you can have different enabled engines for different websites. Make your preferred changes, then press the "Save and reload" button to save your changes.
 
 ### Custom search engines
-> Starting with version 1.2, there are a number of custom search engines available for [one-click installation at the CustomSearchEngines.md page!](https://github.com/xdpirate/GameSearchHelper/blob/main/CustomSearchEngines.md)
+-  Starting with version 1.2, there are a number of custom search engines available for [one-click installation over at the CustomSearchEngines.md page!](https://github.com/xdpirate/GameSearchHelper/blob/main/CustomSearchEngines.md)
 
 You can add any custom search engine you like to the script. To add a new custom search engine, press [new] in the upper-right corner of the custom search engine box within the options page. A new box will pop up beneath it. Fill in a display name, a search URL and an icon in the new text boxes, then click "Save and reload" to save your changes. Here's an explanation of the options:
 
