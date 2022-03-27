@@ -19,7 +19,7 @@ You can add any custom search engine you like to the script. To add a new custom
 The name of the custom search engine. This will show in the custom search engine list and when you hover over the resulting icon on the page
 
 #### **Search URL**
-The URL to use to search with this custom search engine. Substitute the search term (game name) with `%search%`. If you find that this doesn't work as expected, the website might expect spaces in searches to be replaces with plus-signs (+). In that case, substitute `%searchPlus%` instead.
+The URL to use to search with this custom search engine. Substitute the search term (game name) with `%search%`. If you find that this doesn't work as expected, the website might expect spaces in searches to be replaced with plus-signs (+). In that case, substitute `%searchPlus%` instead.
 
 #### **Icon**
 A 16x16 image used to represent the custom search engine. This can be anything that's accepted in a html `<img>` tag's `src` attribute, like a direct URL to an image or an icon, or a [data URI](https://en.wikipedia.org/wiki/Data_URI_scheme) with the image contents itself. I recommend converting an image to a data URI, as that will make it load instantly, instead of having to make a new HTTP request for each icon to be loaded. You can use [Base64 Image Encoder](https://www.base64-image.de/) to easily convert an image into a data URI to paste into this field.
