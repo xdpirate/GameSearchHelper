@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Game Search Helper
 // @namespace    https://store.steampowered.com/
-// @version      1.2.1
+// @version      1.2.2
 // @license      GPLv3
 // @description  Adds buttons on various game sites and stores to search for the game on external sites
 // @author       xdpirate
@@ -134,11 +134,11 @@ GM_addStyle(`
         padding: 5px;
     }
 
-    .GSHModifyCustomButton, #GSHCancelEditButton, #GSHNewCustomSearchButton, #GSHGetEnginesButton {
+    .GSHModifyCustomButton, #GSHCancelEditButton, #GSHNewCustomSearchButton, #GSHGetEnginesButton, a.GSHLink {
         font-size: 12px !important;
         cursor: pointer;
-        font-weight: bold !important;
         color: #AAA;
+        text-decoration: none;
     }
 
     #GSHSaveDiv {
@@ -169,6 +169,16 @@ GM_addStyle(`
         border-radius: 5px;
         width: 100%;
         text-align: center;
+    }
+
+    .GSHLabel {
+        font-weight: normal !important;
+    }
+
+    .GSHInputButton, .GSHInputField {
+        background-color: black !important;
+        color: white !important;
+        border-radius: 10px;
     }
 `);
 
@@ -302,8 +312,8 @@ let providersList = "";
 for(let i = 0; i < providers.length; i++) {
     providersList += `
         <span id="GSHBuiltinSearchSpan_${providers[i].uniqueID}">
-            <input type="checkbox" id="GSHBuiltinSearchCheck_${providers[i].uniqueID}"${providers[i].enabled ? " checked" : ""}>
-            <label for="GSHBuiltinSearchCheck_${providers[i].uniqueID}"><img src="${providers[i].icon}" width="16px" height="16px" /> ${providers[i].title}</label>
+            ${currentContext != "GithubCustomSearchEngines" ? `<input class="GSHInputField" type="checkbox" id="GSHBuiltinSearchCheck_${providers[i].uniqueID}"${providers[i].enabled ? " checked" : ""}>` : ""}
+            <label class="GSHLabel" for="GSHBuiltinSearchCheck_${providers[i].uniqueID}" title="${encodeHTMLEntities(providers[i].url)}"><img src="${providers[i].icon}" width="16px" height="16px" /> ${providers[i].title}</label>
         </span><br />
     `;
 }
@@ -312,10 +322,10 @@ let customProvidersList = "";
 for(const provider in GSHSettings.customProviders) {
     customProvidersList += `
         <span id="GSHCustomSearchSpan_${GSHSettings.customProviders[provider].uniqueID}">
-            <input type="checkbox" id="GSHCustomSearchCheck_${GSHSettings.customProviders[provider].uniqueID}"${GSHSettings.customProviders[provider].enabled[currentContext] ? " checked" : ""}>
-            <label for="GSHCustomSearchCheck_${GSHSettings.customProviders[provider].uniqueID}"><img src="${GSHSettings.customProviders[provider].icon}" width="16px" height="16px" /> ${GSHSettings.customProviders[provider].title}</label> 
-            <span class="GSHModifyCustomButton" id="GSHEdit_${GSHSettings.customProviders[provider].uniqueID}">[e]</span> 
-            <span class="GSHModifyCustomButton" id="GSHDelete_${GSHSettings.customProviders[provider].uniqueID}">[d]</span>
+            ${currentContext != "GithubCustomSearchEngines" ? `<input class="GSHInputField" type="checkbox" id="GSHCustomSearchCheck_${GSHSettings.customProviders[provider].uniqueID}"${GSHSettings.customProviders[provider].enabled[currentContext] ? " checked" : ""}>` : ""}
+            <label class="GSHLabel" for="GSHCustomSearchCheck_${GSHSettings.customProviders[provider].uniqueID}" title="${encodeHTMLEntities(GSHSettings.customProviders[provider].url)}"><img src="${GSHSettings.customProviders[provider].icon}" width="16px" height="16px" /> ${GSHSettings.customProviders[provider].title}</label> 
+            <span class="GSHModifyCustomButton" id="GSHEdit_${GSHSettings.customProviders[provider].uniqueID}" title="Edit">[e]</span> 
+            <span class="GSHModifyCustomButton" id="GSHDelete_${GSHSettings.customProviders[provider].uniqueID}" title="Delete">[d]</span>
         </span><br />
     `;
 }
@@ -325,7 +335,7 @@ newBox.innerHTML = `
     <div id="GSHOuterDiv">
         <span id="GSHToggleButton" title="${GM_info.script.name}">🔍</span>
         <div id="GSHInnerDiv" class="GSHHidden">
-            <div id="GSHLinkbox">[ <a href="https://github.com/xdpirate/GameSearchHelper" target="_blank">Github</a> | <a href="https://greasyfork.org/en/scripts/441809-game-search-helper/" target="_blank">Greasy Fork</a> ]</div>
+            <div id="GSHLinkbox">[ <a href="https://github.com/xdpirate/GameSearchHelper" class="GSHLink" target="_blank" title="Visit GSH's Github repository">Github</a> | <a href="https://greasyfork.org/en/scripts/441809-game-search-helper/" class="GSHLink" target="_blank" title="Visit GSH's Greasy Fork page">Greasy Fork</a> ]</div>
             <div id="GSHHeader">${GM_info.script.name} v${GM_info.script.version}</div>
             <div id="GSHSettingsContent">
                 Current context: <b>${currentContext}</b><br /><br />
@@ -339,7 +349,7 @@ newBox.innerHTML = `
                     </div>
 
                     <div class="GSHSearchContainer">
-                        Custom search engines: <span id="GSHNewCustomSearchButton">[new]</span> <a id="GSHGetEnginesButton" href="https://github.com/xdpirate/GameSearchHelper/blob/main/CustomSearchEngines.md" target="_blank">[get]</a><br />
+                        Custom search engines: <span id="GSHNewCustomSearchButton" title="Add a new custom search engine">[new]</span> <a id="GSHGetEnginesButton" href="https://github.com/xdpirate/GameSearchHelper/blob/main/CustomSearchEngines.md" target="_blank" title="Get some premade custom search engines from the Github repository">[get]</a><br />
                         <div id="GSHCustomSearchEngines">
                             ${customProvidersList}
                         </div>
@@ -347,32 +357,32 @@ newBox.innerHTML = `
                 </div>
 
                 <div id="GSHCustomSearchEngineDiv" class="GSHHidden">
-                    <span id="GSHSearchEngineEditorHeader"></span> <span id="GSHCancelEditButton">[cancel]</span><br /><br />
+                    <span id="GSHSearchEngineEditorHeader"></span> <span id="GSHCancelEditButton" title="Cancel editing this custom search engine">[cancel]</span><br /><br />
                     
                     Display name:<br />
-                    <input type="text" class="GSHTextBox" id="GSHDisplayNameInput"></input>
+                    <input type="text" class="GSHTextBox GSHInputField" id="GSHDisplayNameInput" title="The display name of the custom search engine"></input>
                     <br /><br />
 
                     Search URL <span title="Substitute the search term with %search% in the URL. If the site you are searching requires spaces to be replaced with plus-signs, use %searchPlus% instead.">[help]</span>:<br />
-                    <input type="text" class="GSHTextBox" id="GSHSearchURLInput"></input>
+                    <input type="text" class="GSHTextBox GSHInputField" id="GSHSearchURLInput" title="The search URL of the custom search engine"></input>
                     <br /><br />
 
-                    Icon (16x16, URL or <a href="https://en.wikipedia.org/wiki/Data_URI_scheme" target="_blank">image data URI</a>):<br />
-                    <input type="text" class="GSHTextBox" id="GSHIconInput"></input>
+                    Icon (16x16, URL or <a href="https://en.wikipedia.org/wiki/Data_URI_scheme" class="GSHLink" target="_blank">image data URI</a>):<br />
+                    <input type="text" class="GSHTextBox GSHInputField" id="GSHIconInput" title="The URL or data URI of the custom search engine's icon"></input>
 
                     <input type="hidden" id="GSHUniqueIDInput"></input>
                     <input type="hidden" id="GSHModifyMode" value="none"></input>
                 </div>
 
                 <div id="GSHOptionsDiv">
-                    <input type="checkbox" id="GSHOpenCriticHelperCheckbox"${GSHSettings.OpenCriticHelperEnabled ? " checked" : ""}>
-                    <label for="GSHOpenCriticHelperCheckbox">Open Startpage proxy results with one click</label> <sup><a href="https://github.com/xdpirate/GameSearchHelper/blob/main/README.md#options" target="_blank">?</a></sup><br />
-                    <input type="checkbox" id="GSHStripSpecialCharsCheckbox"${GSHSettings.StripSpecialCharsEnabled ? " checked" : ""}>
-                    <label for="GSHStripSpecialCharsCheckbox">Strip non-ASCII characters from search term (&trade;, &copy;, etc)</label><br />
+                    <input type="checkbox" class="GSHInputField" id="GSHOpenCriticHelperCheckbox"${GSHSettings.OpenCriticHelperEnabled ? " checked" : ""}>
+                    <label class="GSHLabel" for="GSHOpenCriticHelperCheckbox">Open Startpage proxy results with one click</label> <sup><a href="https://github.com/xdpirate/GameSearchHelper/blob/main/README.md#options" class="GSHLink" target="_blank" title="Read about this option in the README on Github">?</a></sup><br />
+                    <input type="checkbox" class="GSHInputField" id="GSHStripSpecialCharsCheckbox"${GSHSettings.StripSpecialCharsEnabled ? " checked" : ""}>
+                    <label class="GSHLabel" for="GSHStripSpecialCharsCheckbox">Strip non-ASCII characters from search term (&trade;, &copy;, etc)</label><br />
                 </div>
 
                 <div id="GSHSaveDiv">
-                    <input type="button" value="Save and reload" id="GSHSaveButton"></input>
+                    <input type="button" class="GSHInputButton" value="Save and reload" id="GSHSaveButton" title="Save your settings and reload the page for them to take effect"></input>
                 </div>
             </div>
         <div>
@@ -629,16 +639,19 @@ function addGSHBox(game, containerElement, boxClass, iconClass) {
 function saveData() {
     let builtinSearchCheckboxes = document.querySelectorAll(`input[id^="GSHBuiltinSearchCheck_"]`);
 
-    for(let i = 0; i < builtinSearchCheckboxes.length; i++) {
-        let uniqueID = builtinSearchCheckboxes[i].id.match(/GSHBuiltinSearchCheck_(.+)$/)[1];
-        GSHSettings.defaultProviders[currentContext][uniqueID].enabled = builtinSearchCheckboxes[i].checked;
-    }
+    if(currentContext != "GithubCustomSearchEngines") {
+        for(let i = 0; i < builtinSearchCheckboxes.length; i++) {
+            let uniqueID = builtinSearchCheckboxes[i].id.match(/GSHBuiltinSearchCheck_(.+)$/)[1];
+            GSHSettings.defaultProviders[currentContext][uniqueID].enabled = builtinSearchCheckboxes[i].checked;
+        }
 
-    let customSearchCheckboxes = document.querySelectorAll(`input[id^="GSHCustomSearchCheck_"]`);
-    for(let i = 0; i < customSearchCheckboxes.length; i++) {
-        let uniqueID = customSearchCheckboxes[i].id.match(/GSHCustomSearchCheck_(.+)$/)[1];
-        GSHSettings.customProviders[uniqueID].enabled[currentContext] = customSearchCheckboxes[i].checked;
+        let customSearchCheckboxes = document.querySelectorAll(`input[id^="GSHCustomSearchCheck_"]`);
+        for(let i = 0; i < customSearchCheckboxes.length; i++) {
+            let uniqueID = customSearchCheckboxes[i].id.match(/GSHCustomSearchCheck_(.+)$/)[1];
+            GSHSettings.customProviders[uniqueID].enabled[currentContext] = customSearchCheckboxes[i].checked;
+        }
     }
+    
 
     if(!document.getElementById("GSHCustomSearchEngineDiv").classList.contains("GSHHidden")) {
         let modifyMode = document.getElementById("GSHModifyMode").value;
@@ -668,6 +681,14 @@ function saveData() {
     GSHSettings.StripSpecialCharsEnabled = document.getElementById("GSHStripSpecialCharsCheckbox").checked;
 
     GM_setValue("GSHSettings", GSHSettings);
+}
+
+function encodeHTMLEntities(text) { // modified from SO answer to include the full range
+    text = text.replace(/[\u0000-\u9999<>\&]/g, function(i) {
+        return '&#'+i.charCodeAt(0)+';';
+    });
+
+    return text;
 }
 
 function die(errorMsg) {

@@ -76,6 +76,12 @@ GSH replaces three previous scripts of mine:
 If you installed any of these scripts previously, you can remove all of them, and replace them with this script, as it has all the features of the scripts it replaces.
 
 ## Changelog
+### v1.2.2
+- Toggling search engines is now disabled on the Github custom search engine page, as it has no effect there anyway
+- Added styles to most elements so the UI stays more consistent across the sites it runs on
+- Added tooltips to most elements within GSH to explain or clarify what things do
+- Minor text adjustments
+
 ### v1.2.1
 - Added a link to the new [custom search engine page on Github](https://github.com/xdpirate/GameSearchHelper/blob/main/CustomSearchEngines.md) inside the options box
 - The custom search engine Github page now previews the icons for each custom search engine
