@@ -3,7 +3,7 @@
 // @namespace    https://store.steampowered.com/
 // @version      1.2.2
 // @license      GPLv3
-// @description  Adds buttons on various game sites and stores to search for the game on external sites
+// @description  Adds search buttons on various gaming related websites to search for the game on external sites
 // @author       xdpirate
 // @include      /^https\:\/\/www\.(nintendolife|pushsquare|purexbox)\.com\/(games|news|reviews|features|guides)\/.*/
 // @include      /^https\:\/\/store\.steampowered\.com\/(app|bundle)\/.*/
