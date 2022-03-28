@@ -208,11 +208,11 @@ if(currentContext == "Startpage") {
 
             if(GSHSettings.customProviders[params.get("uuid")]) {
                 let newSpan = document.createElement("span");
-                newSpan.innerHTML = "Already added to Game Search Helper";
+                newSpan.innerHTML = "Added to GSH";
                 installLink.insertAdjacentElement("afterend", newSpan);
                 installLink.remove();
             } else {
-                installLink.innerHTML = "Add to Game Search Helper";
+                installLink.innerHTML = "Add to GSH";
                 installLink.onclick = function(e){
                     e.preventDefault();
 
