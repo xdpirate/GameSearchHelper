@@ -1,4 +1,9 @@
 ## Changelog
+### v1.3.0
+- The script now runs on Epic Games Store's game and add-ons pages
+- Adjusted the offset of the main GSH options toggle as it would obscure other page elements on Hookshot Media and Epic Games Store
+- Added selection filters to both search engine boxes in options (select all, select none, invert selection)
+
 ### v1.2.2
 - Toggling search engines is now disabled on the Github custom search engine page, as it has no effect there anyway
 - Added styles to most elements so the UI stays more consistent across the sites it runs on

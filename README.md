@@ -36,6 +36,7 @@ The script currently runs on the following websites. Feel free to request your f
 
 | Context | Websites | Supported pages |
 | --- | --- | --- |
+| Epic Games Store | Epic Games Store | Game pages<br />Add-Ons pages |
 | HookshotMedia | Nintendo Life<br />Push Square<br />Pure Xbox | Game pages<br />News<br />Reviews<br />Features<br />Guides |
 | Metacritic | Metacritic | Game pages<br />Games home<br />System home<br />Game lists/browse pages<br />Legacy page |
 | Steam | Steam | Game pages<br />Bundle pages |
