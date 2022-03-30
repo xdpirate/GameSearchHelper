@@ -54,6 +54,21 @@ The script currently runs on the following websites. Feel free to request your f
 ## Support, bug reports, or contributing
 If you've found a bug, need help, would like to contribute code, or have any other concerns, please leave me some [feedback](https://greasyfork.org/en/scripts/441809-game-search-helper/feedback) on Greasy Fork, or create an [issue](https://github.com/xdpirate/GameSearchHelper/issues) in the Github repository.
 
+## Disable GSH on specific sites
+If you don't want GSH to run on one of its supported sites, you can add user excludes through your userscript manager. 
+
+In Tampermonkey:
+1. Click the Tampermonkey toolbar icon
+1. Click Dashboard
+1. Find Game Search Helper and click on its name
+1. Click the Settings tab
+1. Scroll down to the "Includes/Exclude" section
+1. Find the site you would like to exclude in either the "Original includes" or "Original matches" boxes
+1. Click the site URL, then click "Add as User excludes" underneath the box
+1. GSH will no longer run on that site
+
+Other userscript managers should have equivalent functionality available.
+
 ## Backup
 > There are two kinds of people: Those who do backups, and those who *will*.
 
