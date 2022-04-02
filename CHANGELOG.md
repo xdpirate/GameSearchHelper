@@ -1,4 +1,8 @@
 ## Changelog
+### v1.3.2
+- The script now runs on OpenCritic.
+- Selection filters are now hidden on the Github custom search engine page
+
 ### v1.3.1
 - The script now runs on English Wikipedia. The script does a decent job of figuring out what's a game and what's not a game using the category designations. If you see it trigger on a non-game or game franchise article, or don't trigger on a game article, let me know!
 - Fixed an oversight that would give built-in search engine icons and custom search engine icons different spacing in some contexts
