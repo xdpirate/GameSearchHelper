@@ -26,7 +26,7 @@ A 16x16 image used to represent the custom search engine. This can be anything t
 
 ### Options
 - **Reorder search engines**
-You can reorder both built-in and custom search engines by grabbing the handle next to the search engine you wish to move, then dragging it up and down the list. Your custom order is saved on a per-context basis. Built-in search engines will always appear first in the list once they are placed on the page. Adding/removing custom search engines may mess with your saved order.
+You can reorder both built-in and custom search engines by grabbing the handle next to the search engine you wish to move, then dragging it up and down the list. Your custom order is saved on a per-context basis. Built-in search engines will always appear first in the list once they are placed on the page.
 
 - **Open Startpage proxy results with one click**<br />
 Amongst others, sites like OpenCritic have no proper search system to send a request to, only a JavaScript-based search on the site itself. GSH therefore uses Startpage to search OpenCritic, which requires you to click the top result to open the OpenCritic page. This option sends along a custom URL parameter to Startpage when performing that search, detects that parameter, and automatically clicks the top result for you. You can also manually add this parameter (`ocgsh=1`) to any other Startpage URL to achieve the same effect, in order to add other sites with no functioning GET-based search system.
