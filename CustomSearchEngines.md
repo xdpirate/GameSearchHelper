@@ -12,7 +12,7 @@ If GSH is not detected, try reloading the page. If you are running Tampermonkey 
 Feel free to pull request to add new search engines to this page!
 
 ## Disclaimer
-The author has no affliation with any of these sites, and **do not endorse their contents in any way, shape or form**. 
+The author has no affliation with any of these sites, and **does not endorse their contents in any way, shape or form**. 
 
 These custom search engines are provided for your convenience only. Use them at your own risk. 
 
@@ -22,7 +22,7 @@ Template:
 
 | Name | [GSH not detected!](https://gsh?uuid=GSHGithubREPLACEME&name=&url=&icon=) |
 
-The "GSH not installed" text will be replaced by the script itself when it is running on this page.
+The "GSH not detected!" text will be replaced by the script itself when it is running on this page.
 --->
 
 | Search engine | Installation link |
