@@ -1,4 +1,10 @@
 ## Changelog
+### v1.3.5
+- Fixed a bug where new installations wouldn't let any custom search engines appear
+
+### v1.3.4
+- Adding or removing customs search engines should no longer mess with your sort order
+
 ### v1.3.3
 - You can now sort the order in which your search engines appear:
   - Open the options page, then grab the handle to the left of each search engine to reorder it

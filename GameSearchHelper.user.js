@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Game Search Helper
 // @namespace    https://store.steampowered.com/
-// @version      1.3.4
+// @version      1.3.5
 // @license      GPLv3
 // @description  Adds search buttons on various gaming related websites to search for the game on external sites
 // @author       xdpirate
@@ -826,7 +826,7 @@ function addGSHBox(game, containerElement, boxClass, iconClass) {
 
     for(let i = 0; i < customProvidersArray.length; i++) {
         if(customSortOrder) {
-            provider = customProvidersArray[customSortOrder[i]];    
+            provider = customSortOrder[i];
         } else {
             provider = customProvidersArray[i];
         }
@@ -849,20 +849,6 @@ function addGSHBox(game, containerElement, boxClass, iconClass) {
         }
         
     }
-    // if(GSHSettings.customProviders[provider].enabled[currentContext]) {
-    //     let searchLink = document.createElement("span");
-    //     searchLink.classList.add(iconClass);
-
-    //     let title = GSHSettings.customProviders[provider].title;
-    //     let searchURL = GSHSettings.customProviders[provider].url.replace("%search%", game.name).replace("%searchPlus%", game.namePlus);
-    //     let icon = GSHSettings.customProviders[provider].icon;
-
-    //     searchLink.innerHTML = `
-    //         <a target="_blank" title="${title}" href="${searchURL}"><img src="${icon}" width="16px" height="16px" /></a>
-    //     `;
-
-    //     GSHBox.append(searchLink);
-    // }
     
     containerElement.append(GSHBox);
 }
