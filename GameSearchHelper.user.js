@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Game Search Helper
 // @namespace    https://store.steampowered.com/
-// @version      1.3.3
+// @version      1.3.4
 // @license      GPLv3
 // @description  Adds search buttons on various gaming related websites to search for the game on external sites
 // @author       xdpirate
@@ -371,7 +371,7 @@ let customProvidersList = `<div id="GSHCustomSortable">`;
 let i = 0;
 for(const provider in GSHSettings.customProviders) {
     customProvidersList += `
-        <span id="GSHCustomSearchSpan_${GSHSettings.customProviders[provider].uniqueID}" data-id-custom="${i}">
+        <span id="GSHCustomSearchSpan_${GSHSettings.customProviders[provider].uniqueID}" data-id-custom="${provider}">
             ${currentContext != "GithubCustomSearchEngines" ? `<span class="GSHCustomHandle" title="Drag to reorder search engines">≡</span>
             <input class="GSHInputField" type="checkbox" id="GSHCustomSearchCheck_${GSHSettings.customProviders[provider].uniqueID}"${GSHSettings.customProviders[provider].enabled[currentContext] ? " checked" : ""}>` : ""}
             <label class="GSHLabel" for="GSHCustomSearchCheck_${GSHSettings.customProviders[provider].uniqueID}" title="${encodeHTMLEntities(GSHSettings.customProviders[provider].url)}"><img src="${GSHSettings.customProviders[provider].icon}" width="16px" height="16px" /> ${GSHSettings.customProviders[provider].title}</label> 
