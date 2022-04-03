@@ -1,4 +1,12 @@
 ## Changelog
+### v1.3.3
+- You can now sort the order in which your search engines appear:
+  - Open the options page, then grab the handle to the left of each search engine to reorder it
+  - Your sort will apply both to the lists in the options page, and to the order the search engine icons appear on the page
+  - Custom sort order is saved on a per-context basis, just like the state of enabled search engines
+  - Adding/removing custom search engines may mess with your saved order
+  - This feature uses the excellent [Sortable](https://github.com/SortableJS/Sortable)
+
 ### v1.3.2
 - The script now runs on OpenCritic.
 - Selection filters are now hidden on the Github custom search engine page

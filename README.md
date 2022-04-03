@@ -25,6 +25,9 @@ The URL to use to search with this custom search engine. Substitute the search t
 A 16x16 image used to represent the custom search engine. This can be anything that's accepted in a html `<img>` tag's `src` attribute, like a direct URL to an image or an icon, or a [data URI](https://en.wikipedia.org/wiki/Data_URI_scheme) with the image contents itself. I recommend converting an image to a data URI, as that will make it load instantly, instead of having to make a new HTTP request for each icon to be loaded. You can use [Base64 Image Encoder](https://www.base64-image.de/) to easily convert an image into a data URI to paste into this field.
 
 ### Options
+- **Reorder search engines**
+You can reorder both built-in and custom search engines by grabbing the handle next to the search engine you wish to move, then dragging it up and down the list. Your custom order is saved on a per-context basis. Built-in search engines will always appear first in the list once they are placed on the page. Adding/removing custom search engines may mess with your saved order.
+
 - **Open Startpage proxy results with one click**<br />
 Amongst others, sites like OpenCritic have no proper search system to send a request to, only a JavaScript-based search on the site itself. GSH therefore uses Startpage to search OpenCritic, which requires you to click the top result to open the OpenCritic page. This option sends along a custom URL parameter to Startpage when performing that search, detects that parameter, and automatically clicks the top result for you. You can also manually add this parameter (`ocgsh=1`) to any other Startpage URL to achieve the same effect, in order to add other sites with no functioning GET-based search system.
 
@@ -51,6 +54,9 @@ The script currently runs on the following websites. Feel free to request your f
 - OpenCritic
 - eBay.com
 - eBay UK
+
+## Changelog
+You can read the changelog [here](https://github.com/xdpirate/GameSearchHelper/blob/main/CHANGELOG.md).
 
 ## Support, bug reports, or contributing
 If you've found a bug, need help, would like to contribute code, or have any other concerns, please leave me some [feedback](https://greasyfork.org/en/scripts/441809-game-search-helper/feedback) on Greasy Fork, or create an [issue](https://github.com/xdpirate/GameSearchHelper/issues) in the Github repository.
@@ -92,4 +98,11 @@ GSH replaces three previous scripts of mine:
 
 If you installed any of these scripts previously, you can remove all of them, and replace them with this script, as it has all the features of the scripts it replaces.
 
-## [Changelog](https://github.com/xdpirate/GameSearchHelper/blob/main/CHANGELOG.md)
+## Credits
+Game Search Helper uses [Sortable](https://github.com/SortableJS/Sortable), which is licensed under the MIT license:
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
