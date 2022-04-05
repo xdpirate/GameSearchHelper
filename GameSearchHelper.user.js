@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Game Search Helper
 // @namespace    https://store.steampowered.com/
-// @version      1.3.6
+// @version      1.3.7
 // @license      GPLv3
 // @description  Adds search buttons on various gaming related websites to search for the game on external sites
 // @author       xdpirate
@@ -606,6 +606,9 @@ let game = {
         } else {
             return encodeURIComponent(this._name).replace(/%20/g, "+");
         }
+    },
+    get namePlusAlphanumericOnly() {
+        return encodeURIComponent(this._name.replace(/[^A-Za-z0-9 ]/g, "")).replace(/%20/g, "+");
     }
 };
 
@@ -819,7 +822,7 @@ function addGSHBox(game, containerElement, boxClass, iconClass) {
             searchLink.classList.add(iconClass);
 
             let title = providers[builtinSortOrder[i]].title;
-            let searchURL = providers[builtinSortOrder[i]].url.replace("%search%", game.name).replace("%searchPlus%", game.namePlus);
+            let searchURL = providers[builtinSortOrder[i]].url.replace("%search%", game.name).replace("%searchPlus%", game.namePlus).replace("%searchPlusAlpha%", game.namePlusAlphanumericOnly);
             let icon = providers[builtinSortOrder[i]].icon;
 
             searchLink.innerHTML = `
@@ -855,7 +858,7 @@ function addGSHBox(game, containerElement, boxClass, iconClass) {
                 searchLink.classList.add(iconClass);
 
                 let title = GSHSettings.customProviders[provider].title;
-                let searchURL = GSHSettings.customProviders[provider].url.replace("%search%", game.name).replace("%searchPlus%", game.namePlus);
+                let searchURL = GSHSettings.customProviders[provider].url.replace("%search%", game.name).replace("%searchPlus%", game.namePlus).replace("%searchPlusAlpha%", game.namePlusAlphanumericOnly);
                 let icon = GSHSettings.customProviders[provider].icon;
 
                 searchLink.innerHTML = `

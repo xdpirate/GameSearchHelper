@@ -19,14 +19,22 @@ You can add any custom search engine you like to the script. To add a new custom
 The name of the custom search engine. This will show in the custom search engine list and when you hover over the resulting icon on the page
 
 #### **Search URL**
-The URL to use to search with this custom search engine. Substitute the search term (game name) with `%search%`. If you find that this doesn't work as expected, the website might expect spaces in searches to be replaced with plus-signs (+). In that case, substitute `%searchPlus%` instead.
+The URL to use to search with this custom search engine. Substitute the search term (game name) with one of the following tokens:
+- `%search%` - Normal search term substitution. Will keep all characters and just run `encodeURIComponent` on it
+- `%searchPlus%` - Same as above, but replaces spaces/`%20` with a plus-sign `+`. Some sites require this, for instance Metacritic tends to crash if you give it a search term with more than three words using spaces and not plus-signs
+- `%searchPlusAlpha%` - Replaces spaces with plus-signs like the one above, but also strips out any and all non-alphanumeric character apart from space. GameFAQs, for instance, tend to sometimes give a failed search if it detects URL-encoded special characters
+
+Examples:
+- `https://www.gamespot.com/search/?q=%search%` - Searches GameSpot with a normal search term
+- `https://www.metacritic.com/search/game/%searchPlus%/results` - Searches Metacritic substituting spaces with plus-signs
+- `https://gamefaqs.gamespot.com/search?game=%searchPlusAlpha%` - Searches GameFAQs substituting spaces with plus-signs, and stripping all non-alphanumeric characters
 
 #### **Icon**
 A 16x16 image used to represent the custom search engine. This can be anything that's accepted in a html `<img>` tag's `src` attribute, like a direct URL to an image or an icon, or a [data URI](https://en.wikipedia.org/wiki/Data_URI_scheme) with the image contents itself. I recommend converting an image to a data URI, as that will make it load instantly, instead of having to make a new HTTP request for each icon to be loaded. You can use [Base64 Image Encoder](https://www.base64-image.de/) to easily convert an image into a data URI to paste into this field.
 
 ### Options
 - **Reorder search engines**
-You can reorder both built-in and custom search engines by grabbing the handle next to the search engine you wish to move, then dragging it up and down the list. Your custom order is saved on a per-context basis. Built-in search engines will always appear first in the list once they are placed on the page.
+You can reorder both built-in and custom search engines by grabbing the handle next to the search engine you wish to move, then dragging it up and down the list. Your custom order is saved on a per-context basis. Built-in search engines will always appear first in the list once they are placed on the page. If you hate this, you can disable all built-in engines and use the custom list only.
 
 - **Open Startpage proxy results with one click**<br />
 Amongst others, sites like OpenCritic have no proper search system to send a request to, only a JavaScript-based search on the site itself. GSH therefore uses Startpage to search OpenCritic, which requires you to click the top result to open the OpenCritic page. This option sends along a custom URL parameter to Startpage when performing that search, detects that parameter, and automatically clicks the top result for you. You can also manually add this parameter (`ocgsh=1`) to any other Startpage URL to achieve the same effect, in order to add other sites with no functioning GET-based search system.
