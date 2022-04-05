@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Game Search Helper
 // @namespace    https://store.steampowered.com/
-// @version      1.3.5
+// @version      1.3.6
 // @license      GPLv3
 // @description  Adds search buttons on various gaming related websites to search for the game on external sites
 // @author       xdpirate
@@ -11,6 +11,7 @@
 // @match        https://store.epicgames.com/*
 // @match        https://en.wikipedia.org/wiki/*
 // @match        https://opencritic.com/*
+// @match        https://www.gog.com/*/game/*
 // @match        https://www.startpage.com/sp/search*
 // @match        https://github.com/xdpirate/GameSearchHelper/blob/main/CustomSearchEngines.md
 // @require      https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js
@@ -20,7 +21,7 @@
 // @grant        GM_setValue
 // @run-at       document-end
 // ==/UserScript==
-if (window.top != window.self) { // Prevent the script from running in frames
+if(window.top != window.self) { // Prevent the script from running in frames
     throw `[${GM_info.script.name}] Not running as topmost frame, exiting`;
 }
 
@@ -69,7 +70,15 @@ let GSHSettings = GM_getValue("GSHSettings", {
         OpenCritic: {
             Startpage: {enabled: true},
             Google: {enabled: false},
-            Metacritic: {enabled: false},
+            Metacritic: {enabled: true},
+            OpenCritic: {enabled: false},
+            eBay: {enabled: true},
+            eBayUK: {enabled: false}
+        },
+        GOGcom: {
+            Startpage: {enabled: true},
+            Google: {enabled: false},
+            Metacritic: {enabled: true},
             OpenCritic: {enabled: true},
             eBay: {enabled: true},
             eBayUK: {enabled: false}
@@ -86,7 +95,8 @@ let defaultEnabledContextsForNewSearchEngines = {
     Metacritic: true, 
     EpicGamesStore: true,
     Wikipedia: true,
-    OpenCritic: true
+    OpenCritic: true,
+    GOGcom: true
 };
 
 // Gracefully add new options if the user already has saved data that doesn't include them
@@ -220,7 +230,7 @@ GM_addStyle(`
         pointer-events: auto !important;
     }
 
-    .GSHWPBox, .GSHOCContainer {
+    .GSHWPBox, .GSHOCContainer, .GSHGOGContainer {
         margin-bottom: 10px;
     }
 `);
@@ -234,7 +244,8 @@ let contexts = {
     Metacritic: ["metacritic.com"],
     EpicGamesStore: ["store.epicgames.com"],
     Wikipedia: ["en.wikipedia.org"],
-    OpenCritic: ["opencritic.com"]
+    OpenCritic: ["opencritic.com"],
+    GOGcom: ["gog.com"]
 };
 
 let currentContext;
@@ -778,6 +789,13 @@ if(currentContext == "Steam") {
     });
 
     observer.observe(document.documentElement, {subtree: true, childList: true});
+} else if(currentContext == "GOGcom") {
+    let titleElement = document.querySelector(`div.productcard-basics > h1.productcard-basics__title`);
+    if(titleElement) {
+        titleElement.GSHDetected = true;
+        game.name = titleElement.innerHTML;
+        addGSHBox(game, titleElement.insertAdjacentElement("afterend", document.createElement("div")), "GSHGOGContainer", "GSHIcon");
+    }
 }
 
 saveData();

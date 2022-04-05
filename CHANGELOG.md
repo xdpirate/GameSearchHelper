@@ -1,4 +1,7 @@
 ## Changelog
+### v1.3.6
+- The script now runs on GOG.com
+
 ### v1.3.5
 - Fixed a bug where new installations wouldn't let any custom search engines appear
 
