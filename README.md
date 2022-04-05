@@ -26,8 +26,8 @@ The URL to use to search with this custom search engine. Substitute the search t
 
 Examples:
 - Search GameSpot with a normal search term:<br />`https://www.gamespot.com/search/?q=%search%`
-- Search Metacritic, substituting spaces with plus-signs:<br />`https://www.metacritic.com/search/game/%searchPlus%/results`
-- Search GameFAQs, substituting spaces with plus-signs, and strip all non-alphanumeric characters:<br />`https://gamefaqs.gamespot.com/search?game=%searchPlusAlpha%`
+- Search Metacritic, substitute spaces with plus-signs:<br />`https://www.metacritic.com/search/game/%searchPlus%/results`
+- Search GameFAQs, substitute spaces with plus-signs, and strip all non-alphanumeric characters:<br />`https://gamefaqs.gamespot.com/search?game=%searchPlusAlpha%`
 
 #### **Icon**
 A 16x16 image used to represent the custom search engine. This can be anything that's accepted in a html `<img>` tag's `src` attribute, like a direct URL to an image or an icon, or a [data URI](https://en.wikipedia.org/wiki/Data_URI_scheme) with the image contents itself. I recommend converting an image to a data URI, as that will make it load instantly, instead of having to make a new HTTP request for each icon to be loaded. You can use [Base64 Image Encoder](https://www.base64-image.de/) to easily convert an image into a data URI to paste into this field.
