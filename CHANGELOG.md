@@ -1,4 +1,7 @@
 ## Changelog
+### v1.3.8
+- The script now supports the new Hookshot Media site Time Extension.
+
 ### v1.3.7
 - New search term option added: `%searchPlusAlpha%`. This replaces spaces with plus signs, and strips any non-alphanumeric character from the search term. Additionally, the GameFAQs custom search engine on the [custom search engine page](https://github.com/xdpirate/GameSearchHelper/blob/main/CustomSearchEngines.md) has been updated accordingly, as it would sometimes crash if there were non-alphanumeric characters in the search term, URL encoding notwithstanding.
 

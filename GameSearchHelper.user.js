@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         Game Search Helper
 // @namespace    https://store.steampowered.com/
-// @version      1.3.7
+// @version      1.3.8
 // @license      GPLv3
 // @description  Adds search buttons on various gaming related websites to search for the game on external sites
 // @author       xdpirate
-// @include      /^https\:\/\/www\.(nintendolife|pushsquare|purexbox)\.com\/(games|news|reviews|features|guides)\/.*/
+// @include      /^https\:\/\/www\.(nintendolife|pushsquare|purexbox|timeextension)\.com\/(games|news|reviews|features|guides)\/.*/
 // @include      /^https\:\/\/store\.steampowered\.com\/(app|bundle)\/.*/
 // @include      /^https\:\/\/www\.metacritic\.com/(browse|game)(\/games\/)?.*/
 // @match        https://store.epicgames.com/*
@@ -240,7 +240,7 @@ let contexts = {
     GithubCustomSearchEngines: ["github.com"],
     Startpage: ["startpage.com"],
     Steam: ["store.steampowered.com"],
-    HookshotMedia: ["nintendolife.com", "pushsquare.com", "purexbox.com"],
+    HookshotMedia: ["nintendolife.com", "pushsquare.com", "purexbox.com", "timeextension.com"],
     Metacritic: ["metacritic.com"],
     EpicGamesStore: ["store.epicgames.com"],
     Wikipedia: ["en.wikipedia.org"],
